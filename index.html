@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Sistema de Registro de Estudiantes</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="app">
+        <!-- Pantalla de Login -->
+        <div id="loginScreen" class="screen active">
+            <div class="split-container">
+                <div class="left-column">
+                    <div class="hero-section">
+                        <div class="hero-icon">🎓</div>
+                        <h1>Bienvenido</h1>
+                        <p>Sistema de Gestión de Estudiantes</p>
+                        <div class="features">
+                            <div>✓ Registro rápido</div>
+                            <div>✓ Lista de estudiantes</div>
+                            <div>✓ Datos seguros</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="right-column">
+                    <div class="form-wrapper">
+                        <h2>Iniciar Sesión</h2>
+                        <form id="loginForm">
+                            <div class="input-group">
+                                <label>📧 Email</label>
+                                <input type="email" id="loginEmail" placeholder="ejemplo@correo.com" required>
+                            </div>
+                            <div class="input-group">
+                                <label>🔒 Contraseña</label>
+                                <div class="password-field">
+                                    <input type="password" id="loginPassword" placeholder="Mínimo 4 caracteres" required>
+                                    <button type="button" class="toggle-eye" onclick="togglePassword('loginPassword', this)">👁️</button>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn-login">Ingresar</button>
+                        </form>
+                        <p class="register-link">¿No tienes cuenta? <a href="#" onclick="showScreen('registerScreen')">Regístrate aquí</a></p>
+                        <div id="loginMessage" class="message"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pantalla de Registro -->
+        <div id="registerScreen" class="screen">
+            <div class="split-container">
+                <div class="left-column">
+                    <div class="hero-section">
+                        <div class="hero-icon">🚀</div>
+                        <h1>Crear Cuenta</h1>
+                        <p>Únete a nuestra plataforma</p>
+                        <div class="features">
+                            <div>✓ Gestión de estudiantes</div>
+                            <div>✓ Registros organizados</div>
+                            <div>✓ Acceso seguro</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="right-column">
+                    <div class="form-wrapper">
+                        <h2>Registro</h2>
+                        <form id="registerForm">
+                            <div class="input-group">
+                                <label>👤 Nombre</label>
+                                <input type="text" id="regNombre" placeholder="Juan Pérez" required>
+                            </div>
+                            <div class="input-group">
+                                <label>📧 Email</label>
+                                <input type="email" id="regEmail" placeholder="ejemplo@correo.com" required>
+                            </div>
+                            <div class="input-group">
+                                <label>🔒 Contraseña</label>
+                                <div class="password-field">
+                                    <input type="password" id="regPassword" placeholder="Mínimo 4 caracteres" required>
+                                    <button type="button" class="toggle-eye" onclick="togglePassword('regPassword', this)">👁️</button>
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <label>✅ Confirmar</label>
+                                <div class="password-field">
+                                    <input type="password" id="regConfirmPassword" placeholder="Repite tu contraseña" required>
+                                    <button type="button" class="toggle-eye" onclick="togglePassword('regConfirmPassword', this)">👁️</button>
+                                </div>
+                            </div>
+                            <div id="passwordStrength" class="password-strength"></div>
+                            <button type="submit" class="btn-login">Registrarse</button>
+                        </form>
+                        <p class="register-link">¿Ya tienes cuenta? <a href="#" onclick="showScreen('loginScreen')">Iniciar sesión</a></p>
+                        <div id="registerMessage" class="message"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pantalla Dashboard -->
+        <div id="dashboardScreen" class="screen">
+            <div class="dashboard-container">
+                <div class="form-card">
+                    <h2>📝 Registrar Estudiante</h2>
+                    <form id="studentForm">
+                        <div class="input-group">
+                            <label>Nombre Completo</label>
+                            <input type="text" id="studentName" placeholder="Juan Pérez García" required>
+                        </div>
+                        <div class="input-group">
+                            <label>Carrera</label>
+                            <select id="studentCareer" required>
+                                <option value="">Seleccionar</option>
+                                <option>Ingeniería Informática</option>
+                                <option>Administración</option>
+                                <option>Derecho</option>
+                                <option>Medicina</option>
+                                <option>Arquitectura</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label>Semestre</label>
+                            <input type="number" id="studentSemester" min="1" max="10" placeholder="1" required>
+                        </div>
+                        <button type="submit" class="btn-login">Registrar Estudiante</button>
+                    </form>
+                    <button id="logoutBtn" class="btn-secondary">Cerrar Sesión</button>
+                    <div id="dashboardMessage" class="message"></div>
+                </div>
+
+                <div class="table-card">
+                    <h2>📋 Lista de Estudiantes</h2>
+                    <div style="overflow-x: auto;">
+                        <table class="estudiantes-table">
+                            <thead>
+                                <tr><th>Código</th><th>Nombre</th><th>Carrera</th><th>Semestre</th><th>Fecha</th><th>Acciones</th></tr>
+                            </thead>
+                            <tbody id="studentsTableBody">
+                                <tr><td colspan="6" style="text-align: center;">Cargando...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
